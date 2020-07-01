@@ -2,17 +2,24 @@ package com.drugsDB;
 
 import com.mongodb.client.*;
 import org.bson.Document;
+
+import static com.drugsDB.UserHelperMethod.*;
 import static com.mongodb.client.model.Filters.eq;
 
 import java.util.Arrays;
+import java.util.Date;
 
 public class App {
     public static void main( String args[] ) {
         //addDrug();
-        searchDrug();
+        //searchDrug();
         //addPerson();
-
+        //searchPerson("Igor");
+        //addPersonDrug();
+//        dateAdd(new Date(),2);
+        addPersonDrug();
     }
+
 
     public static void searchDrug(){
         MongoDatabase db=DBconnection.DBconnect();
@@ -21,19 +28,49 @@ public class App {
         //System.out.println(myDoc.toJson());
 
         MongoCursor<Document> cursor = collection.find(eq("type", "przeciwzapalny")).iterator();
-        try {
             while (cursor.hasNext()) {
                 System.out.println(cursor.next().toJson());
-                //System.out.println(cursor.next().get("_id"));
             }
-        } finally {
-            cursor.close();
-        }
     }
+
+    public static void addPersonDrug(){
+        MongoDatabase db=DBconnection.DBconnect();
+        MongoCollection<Document> collection = db.getCollection("PersonDrug");
+
+        Document doc = new Document("personName", getPersonID("Igor"))
+                .append("drugName", "Nurofen")
+                .append("active", true)
+                .append("startDate", dateAdd(new Date(),0))
+                .append("endDate",null)
+                .append("addDay",getDayNumber(new Date()))
+                .append("dosageDay",1)
+                .append("dosageHour", Arrays.asList(8,13,19));
+        collection.insertOne(doc);
+
+        Document doc1 = new Document("personName", getPersonID("Igor"))
+                .append("drugName", "Ibuprom")
+                .append("active", true)
+                .append("startDate", dateAdd(new Date(),0))
+                .append("endDate",null)
+                .append("addDay",getDayNumber(new Date()))
+                .append("dosageDay",2)
+                .append("dosageHour", Arrays.asList(8,19));
+        collection.insertOne(doc1);
+
+        Document doc2 = new Document("personName", getPersonID("Igor"))
+                .append("drugName", "Magne B6")
+                .append("active", true)
+                .append("startDate", dateAdd(new Date(),0))
+                .append("endDate",dateAdd(new Date(),14))
+                .append("addDay",getDayNumber(new Date()))
+                .append("dosageDay",1)
+                .append("dosageHour", Arrays.asList(8));
+        collection.insertOne(doc2);
+
+    }
+
     public static void addPerson(){
         MongoDatabase db=DBconnection.DBconnect();
-
-
         MongoCollection<Document> collection = db.getCollection("PersonInfo");
 
         Document doc = new Document("personName", "Jan")
@@ -47,9 +84,6 @@ public class App {
         Document doc2 = new Document("personName", "Kuba")
                 .append("defTime", new Document("morning", 7).append("noon", 12).append("evening",17));
         collection.insertOne(doc2);
-
-
-
     }
 
     public static void addDrug(){
