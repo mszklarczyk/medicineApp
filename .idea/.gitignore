@@ -6,3 +6,11 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+!*src*.java
+!pom.xml
+!.gitignore
+.idea/
+logs/
+target/
+git.txt

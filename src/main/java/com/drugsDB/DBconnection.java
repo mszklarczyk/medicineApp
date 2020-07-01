@@ -24,9 +24,5 @@ public class DBconnection {
         return false;
     }
 
-    public static void dropCollection(String collectionName){
-        MongoDatabase db=DBconnect();
-        MongoCollection<Document> collection = db.getCollection(collectionName);
-        collection.drop();
-    }
+
 }

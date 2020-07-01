@@ -10,9 +10,8 @@ public class App {
     public static void main( String args[] ) {
         //addDrug();
         searchDrug();
+        //addPerson();
 
-        //String str = UserHelperMethod.parseDrugSubstance("powidon, skrobia żelowana, celuloza mikrokrystaliczna, magnezu stearynian");
-        //System.out.println(str);
     }
 
     public static void searchDrug(){
@@ -25,10 +24,32 @@ public class App {
         try {
             while (cursor.hasNext()) {
                 System.out.println(cursor.next().toJson());
+                //System.out.println(cursor.next().get("_id"));
             }
         } finally {
             cursor.close();
         }
+    }
+    public static void addPerson(){
+        MongoDatabase db=DBconnection.DBconnect();
+
+
+        MongoCollection<Document> collection = db.getCollection("PersonInfo");
+
+        Document doc = new Document("personName", "Jan")
+                .append("defTime", new Document("morning", 7).append("noon", 13).append("evening",19));
+        collection.insertOne(doc);
+
+        Document doc1 = new Document("personName", "Igor")
+                .append("defTime", new Document("morning", 8).append("noon", 13).append("evening",18));
+        collection.insertOne(doc1);
+
+        Document doc2 = new Document("personName", "Kuba")
+                .append("defTime", new Document("morning", 7).append("noon", 12).append("evening",17));
+        collection.insertOne(doc2);
+
+
+
     }
 
     public static void addDrug(){
@@ -42,7 +63,7 @@ public class App {
         Document doc = new Document("drugName", "Metafen")
                 .append("type", Arrays.asList("przeciwbólowy", "przeciwgorączkowy"))
                 .append("activeSubstance", new Document("Ibuprofenum", 200).append("Paracetamolum", 325))
-                .append("excipient", Arrays.asList("powidon", "skrobia żelowana", "celuloza mikrokrystaliczna", "magnezu stearynian"))
+                .append("excipient", Arrays.asList( "powidon", "skrobia żelowana", "celuloza mikrokrystaliczna", "magnezu stearynian"))
                 .append("info", "https://www.doz.pl/apteka/p5235-Metafen_tabletki_20_szt.");
         collection.insertOne(doc);
 

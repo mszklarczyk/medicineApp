@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="medicineApp" />
+        <module name="medicineapp" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="medicineApp" options="-parameters" />
+      <module name="medicineapp" options="-parameters" />
     </option>
   </component>
 </project>
