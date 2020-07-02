@@ -1,4 +1,4 @@
-package com.drugsDB;
+package com.drugsDB.model;
 
 import java.util.Date;
 import org.springframework.data.annotation.Id;
@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Document(collection = "DrugsDB")
-public class DrugClass {
+public class Drug {
 
     @Id
     private String id;
@@ -19,7 +19,7 @@ public class DrugClass {
     private boolean active;
     private String activeSubstance;
 
-    public DrugClass(String name, Date createdDate, boolean active) {
+    public Drug(String name, Date createdDate, boolean active) {
         this.name = name;
         this.createdDate=createdDate;
         this.active=active;

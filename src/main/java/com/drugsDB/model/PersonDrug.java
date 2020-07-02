@@ -1,4 +1,4 @@
-package com.drugsDB;
+package com.drugsDB.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document(collection = "PersonDrug")
-public class PersonDrugClass {
+public class PersonDrug {
     @Id
     private String id;
     private String personId;
@@ -23,7 +23,7 @@ public class PersonDrugClass {
     private int dosageDay;
     private List<Integer> dosageHour = new ArrayList<Integer>();
 
-    public PersonDrugClass(String personId, String drugName, boolean active, Date startDate, Date endDate, int addDate,int dosageDay, List<Integer> dosageHour) {
+    public PersonDrug(String personId, String drugName, boolean active, Date startDate, Date endDate, int addDate, int dosageDay, List<Integer> dosageHour) {
         this.personId=personId;
         this.drugName=drugName;
         this.active=active;

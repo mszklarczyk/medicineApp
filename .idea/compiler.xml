@@ -6,13 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="medicineApp" />
         <module name="medicineapp" />
+        <module name="medicineApp" />
+        <module name="accessing-mongodb-data-rest" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="accessing-mongodb-data-rest" options="-parameters" />
       <module name="medicineApp" options="-parameters" />
       <module name="medicineapp" options="-parameters" />
     </option>
