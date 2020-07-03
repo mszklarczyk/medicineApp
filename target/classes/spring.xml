@@ -24,10 +24,10 @@
   </mongo:mongo>
 <mongo:db-factory dbname="testDB" mongo-ref="mongo" id="mongoDbFactory" />
 
-<!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-	<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
-</bean>
- -->
+	<!-- <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+    </bean>
+     -->
 <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 	<constructor-arg name="mongo" ref="mongo" />
 	<constructor-arg name="databaseName" value="testDB"></constructor-arg>
@@ -37,3 +37,5 @@
 	<constructor-arg name="mongoOps" ref="mongoTemplate"/>
 </bean>
 </beans>
+
+

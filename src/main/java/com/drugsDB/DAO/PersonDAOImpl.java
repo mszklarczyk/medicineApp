@@ -31,12 +31,11 @@ public class PersonDAOImpl implements PersonDAO {
         this.mongoOps.save(p, PERSON_COLLECTION);
     }
 
-//    @Override
-//    public int deleteById(String id) {
-//        Query query = new Query(Criteria.where("_id").is(id));
-////        WriteResult result = this.mongoOps.remove(query, Person.class, PERSON_COLLECTION);
-//        WriteResult result = this.mongoOps.remove(query, Person.class, PERSON_COLLECTION);
-//        return result.getN();
-//    }
+    @Override
+    public int deleteById(String id) {
+        Query query = new Query(Criteria.where("_id").is(id));
+        WriteResult result = this.mongoOps.remove(query, Person.class, PERSON_COLLECTION);
+        return result.getN();
+    }
 
 }

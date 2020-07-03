@@ -4,18 +4,18 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.drugsDB.DAO.PersonDAO;
 import com.drugsDB.model.Person;
 
-public class SpringApp {
+public class SpringAppXML {
     public static void main(String[] args) {
 
-        addPerson();
+        //addPerson();
+
     }
 
     public static void addPerson(){
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 
         PersonDAO personDAO = ctx.getBean("personDAO", PersonDAO.class);
-//String id, String name, String address,int morning, int noon, int evening
-        //Person p3 = new Person(null, "Jacek", "Wrocław, PL",9,13,20);
+
         Person p = new Person( "PankajKr",8,12,19);
         personDAO.create(p);
         System.out.println("Generated ID="+p.getId());

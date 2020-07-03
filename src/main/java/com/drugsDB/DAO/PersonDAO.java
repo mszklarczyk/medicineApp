@@ -10,5 +10,5 @@ public interface PersonDAO {
 
     public void update(Person p);
 
-    //public int deleteById(String id);
+    public int deleteById(String id);
 }

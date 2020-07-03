@@ -12,10 +12,10 @@ import java.util.List;
 public class PersonDrug {
     @Id
     private String id;
-    private String personId;
+    private String personName;
     private String drugName;
     private boolean active;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    //@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date startDate;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date endDate;
@@ -23,8 +23,8 @@ public class PersonDrug {
     private int dosageDay;
     private List<Integer> dosageHour = new ArrayList<Integer>();
 
-    public PersonDrug(String personId, String drugName, boolean active, Date startDate, Date endDate, int addDate, int dosageDay, List<Integer> dosageHour) {
-        this.personId=personId;
+    public PersonDrug(String personName, String drugName, boolean active, Date startDate, Date endDate, int addDate, int dosageDay, List<Integer> dosageHour) {
+        this.personName=personName;
         this.drugName=drugName;
         this.active=active;
         this.startDate=startDate;
@@ -32,5 +32,9 @@ public class PersonDrug {
         this.addDate=addDate;
         this.dosageDay=dosageDay;
         this.dosageHour=dosageHour;
+    }
+    @Override
+    public String toString(){
+        return "personName: "+personName+": drugName :"+drugName+": active :"+active+": startDate :"+startDate+": endDate :"+endDate+": addDate:"+addDate+": dosageDay:"+dosageDay+": dosageHour:"+dosageHour;
     }
 }
