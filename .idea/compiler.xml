@@ -6,20 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SpringMongo" />
-        <module name="medicineApp" />
+        <module name="spring-boot-mongodb" />
+        <module name="bootiful-mongodb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="accessing-mongodb-data-rest" target="1.8" />
-      <module name="medicineapp" target="1.8" />
+      <module name="bootiful-mongodb" target="1.8" />
+      <module name="spring-boot-mongodb" target="1.8" />
     </bytecodeTargetLevel>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="accessing-mongodb-data-rest" options="-parameters" />
-      <module name="medicineApp" options="-parameters" />
-      <module name="medicineapp" options="-parameters" />
-    </option>
   </component>
 </project>

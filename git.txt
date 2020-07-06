@@ -1,3 +1,4 @@
+git remote add origin https://github.com/mszklarczyk/medicineApp.git
 cd %project folder%
 git init		repo init
 git status		
@@ -6,3 +7,5 @@ git commit -m "Your message about the commit"
 git push origin yourbranchname
 
 git pull origin master
+
+git checkout -b <branch_name>
