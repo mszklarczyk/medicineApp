@@ -16,14 +16,14 @@ public class PersonDrugDALImpl implements PersonDrugDAL{
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<PersonDrug> getAllPersonDrug() {
+    public List<PersonDrug> getAllPersonsDrug() {
         return mongoTemplate.findAll(PersonDrug.class);
     }
 
     @Override
-    public PersonDrug getPersonById(String personId) {
+    public PersonDrug getPersonByName(String personName) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("personID").is(personId));
+        query.addCriteria(Criteria.where("personName").is(personName));
         return mongoTemplate.findOne(query, PersonDrug.class);
     }
 
@@ -41,33 +41,53 @@ public class PersonDrugDALImpl implements PersonDrugDAL{
     }
 
     @Override
-    public Object getAllDosageHour(String Id) {
+    public Object getAllDosageHour(String personName) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("Id").is(Id));
+        query.addCriteria(Criteria.where("personName").is(personName));
         PersonDrug personDrug = mongoTemplate.findOne(query, PersonDrug.class);
         return personDrug != null ? personDrug.getDosageHour() : "User not found.";
     }
 
+//    @Override
+//    public String addDosageHour(String personName, int value) {
+//        Query query = new Query();
+//        query.addCriteria(Criteria.where("personName").is(personName));
+//        PersonDrug personDrug = mongoTemplate.findOne(query, PersonDrug.class);
+//        if (personDrug != null) {
+//            personDrug.getDosageHour().add(value);
+//            mongoTemplate.save(personDrug);
+//            return "Key added.";
+//        } else {
+//            return "User not found.";
+//        }
+//    }
     @Override
-    public String addDosageHour(String Id, int value) {
+    public String addDosageHour(String personName,  int value) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("Id").is(Id));
-        PersonDrug personDrug = mongoTemplate.findOne(query, PersonDrug.class);
-        if (personDrug != null) {
-            personDrug.getDosageHour().add(value);
-            mongoTemplate.save(personDrug);
+        query.addCriteria(Criteria.where("personName").is(personName));
+        PersonDrug person = mongoTemplate.findOne(query, PersonDrug.class);
+        if (person != null) {
+            person.getDosageHour().add(value);
+            mongoTemplate.save(person);
             return "Key added.";
         } else {
             return "User not found.";
         }
     }
-
+    @Override
+    public Integer getPersonDosageHour(String personName, int key) {
+        Query query = new Query();
+        query.fields().include("userSettings");
+        query.addCriteria(Criteria.where("userId").is(personName).andOperator(Criteria.where("userSettings." + key).exists(true)));
+        PersonDrug person = mongoTemplate.findOne(query, PersonDrug.class);
+        return person != null ? person.getDosageHour().get(key) : 0;
+    }
     // should return all drugs for specific person
     @Override
-    public String getAllUserDrug(String personId){
+    public List<PersonDrug> getAllUserDrug(String personName){
         Query query = new Query();
-        query.addCriteria(Criteria.where("personID").is(personId));
-        PersonDrug personDrug = mongoTemplate.findOne(query, PersonDrug.class);
-        return personDrug != null ? personDrug.getDrugName() : "User not found.";
+        query.addCriteria(Criteria.where("personName").is(personName));
+        return  mongoTemplate.find(query,PersonDrug.class) ;
     }
+
 }

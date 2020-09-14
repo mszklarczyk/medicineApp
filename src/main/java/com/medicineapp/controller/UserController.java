@@ -4,11 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.medicineapp.dal.UserDAL;
 import com.medicineapp.dal.UserRepository;
@@ -40,12 +36,19 @@ public class UserController {
 		LOG.info("Getting all users.");
 		return userRepository.findAll();
 	}
-
-	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-	public User getUser(@PathVariable String userId) {
-		LOG.info("Getting user with ID: {}.", userId);
-		return userRepository.findOne(userId);
+//Get List of User by name
+	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	public List<User> getUser(@PathVariable String name) {
+		LOG.info("Getting users with name: {}.", name);
+		return userDAL.getAllUserByName(name);
 	}
+	//Get User by id
+//	@RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+//	public User getUser(@PathVariable String userId) {
+//		LOG.info("Getting user with ID: {}.", userId);
+//		return userRepository.findOne(userId);
+//	}
+
 
 	// @RequestMapping(value = "/settings/{userId}", method = RequestMethod.GET)
 	// public Object getAllUserSettings(@PathVariable String userId) {
@@ -82,12 +85,12 @@ public class UserController {
 	// }
 
 	@RequestMapping(value = "/settings/{userId}/{key}", method = RequestMethod.GET)
-	public String getUserSetting(@PathVariable String userId, @PathVariable String key) {
+	public int getUserSetting(@PathVariable String userId, @PathVariable String key) {
 		return userDAL.getUserSetting(userId, key);
 	}
 
 	@RequestMapping(value = "/settings/{userId}/{key}/{value}", method = RequestMethod.GET)
-	public String addUserSetting(@PathVariable String userId, @PathVariable String key, @PathVariable String value) {
+	public String addUserSetting(@PathVariable String userId, @PathVariable String key, @PathVariable Integer value) {
 		User user = userRepository.findOne(userId);
 		if (user != null) {
 			user.getUserSettings().put(key, value);

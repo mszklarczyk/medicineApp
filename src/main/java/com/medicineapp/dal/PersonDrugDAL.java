@@ -6,17 +6,19 @@ import com.medicineapp.model.User;
 import java.util.List;
 
 public interface PersonDrugDAL {
-    List<PersonDrug> getAllPersonDrug();
+    List<PersonDrug> getAllPersonsDrug();
 
-    PersonDrug getPersonById(String personId);
+    PersonDrug getPersonByName(String personName);
 
     PersonDrug getPersonDrugByID(String Id);
 
     PersonDrug addNewPersonDrug(PersonDrug personDrug);
 
-    Object getAllDosageHour(String personId);
+    Object getAllDosageHour(String personName);
 
-    String addDosageHour(String personId, int value);
+    Integer getPersonDosageHour(String personName, int key);
 
-    String getAllUserDrug(String personId);     // should return all drugs for specific person
+    String addDosageHour(String personName,  int value);
+
+    List<PersonDrug> getAllUserDrug(String personName);     // should return all drugs for specific person
 }

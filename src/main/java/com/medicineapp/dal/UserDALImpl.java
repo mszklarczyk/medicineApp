@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.medicineapp.model.User;
 
+import javax.jws.soap.SOAPBinding;
+
 @Repository
 public class UserDALImpl implements UserDAL {
 
@@ -44,16 +46,23 @@ public class UserDALImpl implements UserDAL {
 	}
 
 	@Override
-	public String getUserSetting(String userId, String key) {
+	public List<User> getAllUserByName(String name){
+		Query query = new Query();
+		query.addCriteria(Criteria.where("name").is(name));
+		return mongoTemplate.find(query,User.class);
+	}
+
+	@Override
+	public int getUserSetting(String userId, String key) {
 		Query query = new Query();
 		query.fields().include("userSettings");
 		query.addCriteria(Criteria.where("userId").is(userId).andOperator(Criteria.where("userSettings." + key).exists(true)));
 		User user = mongoTemplate.findOne(query, User.class);
-		return user != null ? user.getUserSettings().get(key) : "Not found.";
+		return user != null ? user.getUserSettings().get(key) : 0;
 	}
 
 	@Override
-	public String addUserSetting(String userId, String key, String value) {
+	public String addUserSetting(String userId, String key, int value) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userId").is(userId));
 		User user = mongoTemplate.findOne(query, User.class);

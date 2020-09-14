@@ -14,7 +14,9 @@ public interface UserDAL {
 
 	Object getAllUserSettings(String userId);
 
-	String getUserSetting(String userId, String key);
+	int getUserSetting(String userId, String key);
 
-	String addUserSetting(String userId, String key, String value);
+	String addUserSetting(String userId, String key, int value);
+
+	List<User> getAllUserByName (String name);
 }
